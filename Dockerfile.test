@@ -2,11 +2,12 @@ FROM golang:1.12-alpine
 
 # Install git
 RUN set -ex; \
-    apk update; \
-    apk add --no-cache git
+    apk add --update --no-cache ca-certificates git
 
 # Set working directory
-WORKDIR /go/src/github.com/anargu/dosmj/
+WORKDIR /dosmj/
+COPY . ./
+RUN GO111MODULE=on go mod download
 
 # Run tests
 CMD CGO_ENABLED=0 go test ./...
