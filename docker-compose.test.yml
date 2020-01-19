@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  dosmj-integration-test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    env_file:
+      - test.env
