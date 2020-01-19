@@ -9,12 +9,7 @@ var (
 	mjApiKeyPublic,
 	mjApiKeyPrivate,
 	mjSenderName,
-	mjSenderEmail,
-
-	doSpacesKey,
-	doSpacesSecret,
-	doSpacesEndpoint,
-	doSpacesBucketName string
+	mjSenderEmail string
 )
 
 func main() {
@@ -25,22 +20,12 @@ func main() {
 	mjSenderName = os.Getenv("MJ_SENDER_NAME")
 	mjSenderEmail = os.Getenv("MJ_SENDER_EMAIL")
 
-	doSpacesKey = os.Getenv("DO_SPACES_KEY")
-	doSpacesSecret = os.Getenv("DO_SPACES_SECRET")
-	doSpacesEndpoint = os.Getenv("DO_SPACES_ENDPOINT")
-	doSpacesBucketName = os.Getenv("DO_SPACES_NAME")
-
 	if port == "" ||
 		// MJ
 		mjApiKeyPublic == "" ||
 		mjApiKeyPrivate == "" ||
 		mjSenderName == "" ||
-		mjSenderEmail == "" ||
-		// DO Spaces
-		doSpacesKey == "" ||
-		doSpacesSecret == "" ||
-		doSpacesEndpoint == "" ||
-		doSpacesBucketName == "" {
+		mjSenderEmail == "" {
 
 		panic("env variables should be provided")
 	}
