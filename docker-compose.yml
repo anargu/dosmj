@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  dosmj:
+    image:
+    env_file:
+      - test.env
