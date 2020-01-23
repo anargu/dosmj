@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"regexp"
 	"testing"
@@ -38,6 +39,15 @@ func TestPuttingNewTemplate(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+
+func TestGettingSavedTemplate(t *testing.T) {
+	reader, err := GetTemplate(testFileName)
+	if err != nil {
+		t.Fatal(err)
+	}
+	dataInBytes, err := ioutil.ReadAll(reader)
+	fmt.Printf("%v\n", dataInBytes)
 }
 
 func TestDeletingNewTemplate(t *testing.T) {

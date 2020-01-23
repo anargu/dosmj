@@ -21,7 +21,7 @@ func ErrorResponse(c *gin.Context, code int, error error) {
 	})
 }
 
-func RunServer() {
+func runServer() {
 	r := gin.Default()
 
 	templateRoute := r.Group("/template")
@@ -129,10 +129,14 @@ func RunServer() {
 				ErrorResponse(c, http.StatusBadRequest, err)
 				return
 			}
+			input.EmailSepcs.HTMLPart = buff.String()
+
 			// validating from data
-			if input.EmailSepcs.From.Name == "" || input.EmailSepcs.From.Email == "" {
-				input.EmailSepcs.From.Name = mjSenderName
-				input.EmailSepcs.From.Email = mjSenderEmail
+			if input.EmailSepcs.From == nil {
+				input.EmailSepcs.From = &RecipientInputPart{
+					Email: mjSenderEmail,
+					Name:  mjSenderName,
+				}
 			}
 
 			err = SendEmail(&input.EmailSepcs)

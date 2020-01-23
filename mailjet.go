@@ -2,21 +2,26 @@ package main
 
 import (
 	"github.com/mailjet/mailjet-apiv3-go"
+	"os"
 )
 
 var (
-	mj = mailjet.NewMailjetClient(mjApiKeyPublic, mjApiKeyPrivate)
+	mjApiKeyPublic  = os.Getenv("MJ_APIKEY_PUBLIC")
+	mjApiKeyPrivate = os.Getenv("MJ_APIKEY_PRIVATE")
+	mjSenderName    = os.Getenv("MJ_SENDER_NAME")
+	mjSenderEmail   = os.Getenv("MJ_SENDER_EMAIL")
+	mj              = mailjet.NewMailjetClient(mjApiKeyPublic, mjApiKeyPrivate)
 )
 
 type RecipientInputPart struct {
-	Email string `json:"to" binding:"required"`
-	Name  string `json:"to" binding:"required"`
+	Email string `json:"email" binding:"required"`
+	Name  string `json:"name" binding:"required"`
 }
 
 type MJInput struct {
 	//TemplateName string `json:"template_name" binding:"required"`
 	//TemplateData *interface{} `json:"template_data"`
-	From     RecipientInputPart   `json:"from"`
+	From     *RecipientInputPart  `json:"from"`
 	To       []RecipientInputPart `json:"to" binding:"required"`
 	Subject  string               `json:"subject" binding:"required"`
 	HTMLPart string
