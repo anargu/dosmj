@@ -2,6 +2,6 @@ version: '3'
 
 services:
   dosmj:
-    image:
+    image: dosmj
     env_file:
       - test.env
