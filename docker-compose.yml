@@ -2,6 +2,6 @@ version: '3'
 
 services:
   dosmj:
-    image: anargu101/dosmj
+    image: anargu101/dosmj:1.0.0
     env_file:
       - test.env
